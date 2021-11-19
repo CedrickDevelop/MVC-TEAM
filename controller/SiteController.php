@@ -7,8 +7,6 @@ use App\Core\Router;
 
 class SiteController
 {
- protected static Router $router;
-
     public static function handleContact()
     {
       var_dump($_POST);
