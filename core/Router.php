@@ -101,10 +101,15 @@ class Router
      * @return string
      */
     public function viewContent($view, $params)
-    {
-        foreach ($params as $key => $value) {
-            $$key = $value; // $$key => va donner $username, permet de créer une variable ayant comme nom la valeur d'une autre variable 
-        }
+    {   
+        // methode 1
+        // foreach ($params as $key => $value) {
+        //     $$key = $value; // $$key => va donner $username, permet de créer une variable ayant comme nom la valeur d'une autre variable 
+        // }
+
+        // methode 2 même chose que methode 1 for each
+        extract($params);
+        
         ob_start();
         include_once Application::$ROOT_DIR . "/views/{$view}.php";
         return ob_get_clean();
