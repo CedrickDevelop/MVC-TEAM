@@ -22,4 +22,19 @@ class SiteController
         return Application::$app->router->renderView("contact");
         
     }
+
+    /**
+     * show page
+     * @return void
+     */
+    public static function welcome(){
+      $params = [
+        'username' => 'toto'
+      ];
+    
+      return Application::$app->router->renderView("welcome");
+      
+    }
+
+    
 }
