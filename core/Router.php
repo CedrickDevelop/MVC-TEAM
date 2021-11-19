@@ -77,10 +77,11 @@ class Router
      * @param string $view
      * @return string
      */
-    public function renderView($view)
+    public function renderView($view, $data = [])
     {
         $layoutContent = $this->layoutContent();
-        $viewContent = $this->viewContent($view);
+        $viewContent = $this->viewContent($view, $data);
+        var_dump($data);
         return str_replace('{{ content }}', $viewContent, $layoutContent);
     }
 
@@ -100,10 +101,11 @@ class Router
      * @param string $view
      * @return string
      */
-    public function viewContent($view)
+    public function viewContent($view, $data)
     {
         ob_start();
         include_once Application::$ROOT_DIR . "/views/{$view}.php";
+        $data = $data;
         return ob_get_clean();
     }
 
