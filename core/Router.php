@@ -65,10 +65,10 @@ class Router
         }
 
         if (is_string($callback)) {
-            return $this->renderView($callback);
+            return $this->renderView($callback);    
         }
 
-        return call_user_func($callback);//va executer les fonctions
+        return call_user_func($callback);//va executer les fonctions, accepte class et method (deux argument) accpete une function seul aussi
 
     }
 
@@ -106,7 +106,5 @@ class Router
         include_once Application::$ROOT_DIR . "/views/{$view}.php";
         return ob_get_clean();
     }
-
-
 
 }
