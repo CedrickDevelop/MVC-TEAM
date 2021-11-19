@@ -30,7 +30,8 @@ class SiteController
         'username' => 'toto'
       ];
     
-      return Application::$app->router->renderView("welcome");
+      return Application::$app->router->renderView("welcome", [
+          "username" => $params]);
       
     }
 
