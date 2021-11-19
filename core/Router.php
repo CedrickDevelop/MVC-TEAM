@@ -100,10 +100,13 @@ class Router
      * @param string $view
      * @return string
      */
-    public function viewContent($view)
+    public function viewContent($view,$params)
     {
         ob_start();
         include_once Application::$ROOT_DIR . "/views/{$view}.php";
+        foreach ($params as $key => $value){
+            $key = $params;
+        };
         return ob_get_clean();
     }
 
