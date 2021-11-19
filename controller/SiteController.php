@@ -4,8 +4,8 @@ namespace App\Controller;
 
 use App\Core\Application;
 use App\Core\Router;
-
-class SiteController
+use App\Controller\RenderController;
+class SiteController extends RenderController
 {
     public static function handleContact()
     {
@@ -17,8 +17,7 @@ class SiteController
      * @return void
      */
     public static function contact(){
-        return Application::$app->router->renderView("contact");
-        
+        return RenderController::renderParentView("contact", $data = []);
     }
 
     /**
@@ -27,12 +26,12 @@ class SiteController
      */
     public static function welcome(){
       $params = [
-        'username' => 'toto'
+        'username' => 'toto',
+        'email' => "allll@daada.fr"
       ];
     
-      return Application::$app->router->renderView("welcome", $params);
+      return RenderController::renderParentView("welcome", $params);
       
     }
-
-    
+   
 }
