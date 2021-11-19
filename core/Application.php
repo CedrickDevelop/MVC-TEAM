@@ -8,6 +8,7 @@ use App\Core\Response;
 class Application
 {
     public static string $ROOT_DIR;
+    public static Application $app;
     public Router $router;
     public Request $request;
     public Response $response;
@@ -18,7 +19,8 @@ class Application
      * @return void
      */
     public function __construct(string $rootPath)
-    {
+    {   
+        self::$app = $this;
         self::$ROOT_DIR = $rootPath;
         $this->request = new Request();
         $this->response = new Response();

@@ -2,31 +2,37 @@
 
 namespace App\Controller;
 
-
+use App\Core\Application;
 use App\Core\Router;
 
 class SiteController
 {
- protected static Router $router;
-
-    /**
-     * SiteController constructor
-     */
-    public function __construct(Router $router)
-    {
-        self::$router = $router;
-    }
-
     public static function handleContact()
     {
       var_dump($_POST);
     }
 
-    public static function listContact(){
-        var_dump("bouh"); //
-       // var_dump(self::$router);
-        self::$router->renderView('contact');
-
-
+    /**
+     * show page
+     * @return void
+     */
+    public static function contact(){
+        return Application::$app->router->renderView("contact");
+        
     }
+
+    /**
+     * show page
+     * @return void
+     */
+    public static function welcome(){
+      $params = [
+        'username' => 'toto'
+      ];
+    
+      return Application::$app->router->renderView("welcome");
+      
+    }
+
+    
 }
