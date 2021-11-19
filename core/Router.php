@@ -5,7 +5,8 @@ namespace App\Core;
 use App\Controller\SiteController;
 use App\Core\Request;
 use App\Core\Response;
-
+use Reflection;
+use ReflectionClass;
 
 class Router
 {
@@ -55,6 +56,7 @@ class Router
      */
     public function resolve()
     {
+
         $path = $this->request->getPath();
         $method = $this->request->getMethod();
         $callback = $this->routes[$method][$path] ?? false;
@@ -68,19 +70,19 @@ class Router
             return $this->renderView($callback);    
         }
 
-        return call_user_func($callback);//va executer les fonctions, accepte class et method (deux argument) accpete une function seul aussi
-
+        return call_user_func($callback);
     }
+
 
     /**
      * render view
      * @param string $view
      * @return string
      */
-    public function renderView($view)
+    public function renderView($view, $params = [])
     {
         $layoutContent = $this->layoutContent();
-        $viewContent = $this->viewContent($view);
+        $viewContent = $this->viewContent($view,$params);
         return str_replace('{{ content }}', $viewContent, $layoutContent);
     }
 
@@ -100,10 +102,17 @@ class Router
      * @param string $view
      * @return string
      */
-    public function viewContent($view)
+    public function viewContent($view, $params)
     {
+        // creation de variables ayant comme nom la valeur d'une autre variable
+        foreach ($params as $key => $value){ 
+            $$key = $value; 
+        }
+        // Meme fonctionnement que le foreach avec extract
+        //extract($params);
+
         ob_start();
-        include_once Application::$ROOT_DIR . "/views/{$view}.php";
+        include_once Application::$ROOT_DIR . "/views/{$view}.php";        
         return ob_get_clean();
     }
 

@@ -1,3 +1,9 @@
+<?php
+
+var_dump($args);
+
+?>
+
 <h3>Contact us</h3>
 <form action="" method="post">
     <div class="mb-3">
