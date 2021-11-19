@@ -77,11 +77,10 @@ class Router
      * @param string $view
      * @return string
      */
-    public function renderView($view, $data = [])
+    public function renderView($view, $params = [])
     {
         $layoutContent = $this->layoutContent();
-        $viewContent = $this->viewContent($view, $data);
-        var_dump($data);
+        $viewContent = $this->viewContent($view, $params);
         return str_replace('{{ content }}', $viewContent, $layoutContent);
     }
 
@@ -101,11 +100,13 @@ class Router
      * @param string $view
      * @return string
      */
-    public function viewContent($view, $data)
+    public function viewContent($view, $params)
     {
+        foreach ($params as $key => $value) {
+            $$key = $value; // $$key => va donner $username, permet de créer une variable ayant comme nom la valeur d'une autre variable 
+        }
         ob_start();
         include_once Application::$ROOT_DIR . "/views/{$view}.php";
-        $data = $data;
         return ob_get_clean();
     }
 
